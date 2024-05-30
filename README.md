@@ -4,6 +4,41 @@ Este projeto cria um data warehouse completo utilizando PostgreSQL instanciado n
 
 O objetivo é demonstrar como construir uma infraestrutura de dados moderna e eficiente, e como usar dbt-core para criar modelos de dados e relatórios.
 
+# dbt-core: Transformação de Dados para Engenharia de Dados
+
+## Introdução
+
+A ferramenta dbt (data build tool) é uma solução inovadora no campo da engenharia de dados, projetada para conectar-se a repositórios de dados centralizados como Data Warehouses e Data Lakes. Ela habilita usuários de negócios, analistas e engenheiros a gerar transformações de dados, regras de negócios e insights valiosos de forma autônoma e eficiente.
+
+![Texto alternativo](pics/overview.png)
+
+
+## O que é dbt?
+
+O dbt é uma ferramenta focada na transformação de dados dentro de um pipeline de ETL/ELT, onde ETL significa Extrair, Transformar e Carregar. Ele se concentra especificamente no aspecto de Transformação (T), permitindo a criação de fluxos de trabalho de transformação de dados usando SQL.
+
+## Origem e Evolução
+
+Criado em 2016 para endereçar desafios de unidade e orquestração em SQL, o dbt ganhou tração com a popularização de Data Warehouses em cloud como Redshift, BigQuery, Azure Synapse e Snowflake. Seu desenvolvimento foi impulsionado tanto pela equipe original quanto por uma vibrante comunidade de código aberto.
+
+## Princípios Fundamentais do dbt
+
+### SQL para Desenvolvimento Rápido
+
+O dbt utiliza SQL, juntamente com a linguagem de templates Jinja, permitindo a reutilização e modularização do código SQL.
+
+### Controle de Versão e Trabalho Colaborativo
+
+Com integração Git, o dbt facilita a colaboração e o controle de versões, essencial para pipelines de dados robustos e confiáveis.
+
+### Qualidade e Testes
+
+O dbt suporta integração e entrega contínuas, juntamente com testes automatizados, garantindo a integridade e a eficácia das transformações de dados.
+
+### Documentação e Linhagem de Dados
+
+A documentação é gerada automaticamente, proporcionando uma visão clara da linhagem dos dados e facilitando a rastreabilidade e a compreensão das transformações.
+
 ## Estrutura do Projeto
 
 - **AWS RDS PostgreSQL**: Instância de banco de dados PostgreSQL.
@@ -177,14 +212,3 @@ graph TD
     D[Empregados] --> C
     D --> B
 ```
-
-## Contribuição
-
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou pull requests.
-
-## Licença
-
-Este projeto está licenciado sob a Licença MIT. Veja o arquivo LICENSE para mais detalhes.
-```
-
-Este `README.md` fornece uma visão geral do projeto, detalha os passos de configuração e execução, e inclui as estruturas dos modelos SQL necessários para gerar os relatórios especificados.
