@@ -34,7 +34,7 @@ A **Jornada de Dados** é o seu lugar
 
 O dbt é uma ferramenta focada na transformação de dados dentro de um pipeline de ETL/ELT, onde ETL significa Extrair, Transformar e Carregar. Ele se concentra especificamente no aspecto de Transformação (T), permitindo a criação de fluxos de trabalho de transformação de dados usando SQL.
 
-![Vamos utilizar o case Northwind](./pics/overview.png)
+![Vamos utilizar o case Northwind](./pics/northwind.png)
 
 ## Origem e Evolução
 
