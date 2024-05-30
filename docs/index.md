@@ -2,8 +2,6 @@
 
 Olá, boas-vindas ao bootcamp de Data warehouse com dbt-core e PostgreSQL na AWS!
 
-![logo](./images/images.png)
-
 A nossa intenção neste curso é facilitar o aprendizado sobre como construir um data warehouse eficiente utilizando dbt-core. Vamos explorar como integrar o dbt-core com o PostgreSQL, criar transformações de dados, e gerar insights valiosos. 
 
 ![logo](./images/cloud-overview.jpg)

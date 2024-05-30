@@ -1,6 +1,6 @@
 # mkdocs.yml
 
-site_name: dbt-core
+site_name: Bootcamp dbt-core
 site_description: 'Guia para construir um data warehouse moderno utilizando dbt-core e PostgreSQL na AWS.'
 site_author: 'Luciano Vasconcelos'
 
@@ -34,6 +34,9 @@ nav:
   - Guia Rápido:
       - 'Bem-vindo': guides/bem_vindo.md
       - 'Configuração Inicial': guides/guia_rapido.md
+  - Conteúdo:
+      - 'dbt models': reference/models.md
+      - 'Projeto': reference/projeto.md
 
 # Plugins
 plugins:
