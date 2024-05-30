@@ -123,3 +123,12 @@ A documentação é gerada automaticamente, proporcionando uma visão clara da l
 ## Veja a documentação completa**:
 
 [![Documentacao](./pics/doc.png)](https://lvgalvao.github.io/dbt-core-northwind-project/)
+
+## Executar Testes e Gerar Documentação
+
+```bash
+dbt run
+dbt test
+dbt docs generate
+dbt docs serve
+```

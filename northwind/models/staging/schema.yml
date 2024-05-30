@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Tabela de clientes do estágio"
+    columns:
+      - name: customer_id
+        description: "ID único do cliente"
+        tests:
+          - not_null
+          - unique
+      - name: company_name
+        description: "Nome da empresa"
+        tests:
+          - not_null
+
+  - name: stg_orders
+    description: "Tabela de pedidos do estágio"
+    columns:
+      - name: order_id
+        description: "ID único do pedido"
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "ID do cliente que fez o pedido"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+
+  - name: stg_order_details
+    description: "Tabela de detalhes dos pedidos"
+    columns:
+      - name: order_id
+        description: "ID do pedido"
+        tests:
+          - not_null
+      - name: product_id
+        description: "ID do produto"
+        tests:
+          - not_null
+      - name: unit_price
+        description: "Preço unitário"
+        tests:
+          - not_null
+      - name: quantity
+        description: "Quantidade"
+        tests:
+          - not_null
