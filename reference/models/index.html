@@ -13,8 +13,6 @@
       
       
       
-        <link rel="prev" href="../bem_vindo/">
-      
       
       
       <link rel="icon" href="../../images/logo.svg">
@@ -22,7 +20,7 @@
     
     
       
-        <title>Configuração Inicial - Data Warehouse Moderno com dbt-core e PostgreSQL na AWS</title>
+        <title>Models - Data Warehouse Moderno com dbt-core e PostgreSQL na AWS</title>
       
     
     
@@ -72,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#guia-rapido-e-explicando-os-models-do-dbt-core" class="md-skip">
+        <a href="#teoria-sobre-os-models-no-dbt-core" class="md-skip">
           Ir para o conteúdo
         </a>
       
@@ -105,7 +103,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Configuração Inicial
+              Models
             
           </span>
         </div>
@@ -191,13 +189,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../bem_vindo/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../guides/bem_vindo/" class="md-tabs__link">
           
   
   Guia Rápido
@@ -264,28 +260,23 @@
       
   
   
-    
   
   
-  
     
     
     
       
-        
-        
-      
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -296,7 +287,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Guia Rápido
@@ -310,7 +301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bem_vindo/" class="md-nav__link">
+      <a href="../../guides/bem_vindo/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -328,28 +319,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Configuração Inicial
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../guides/guia_rapido/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -358,84 +331,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Índice">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Índice
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#guia-rapido-e-explicando-os-models-do-dbt-core" class="md-nav__link">
-    <span class="md-ellipsis">
-      Guia rapido e explicando os Models do dbt-core
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#o-que-sao-models-no-dbt-core" class="md-nav__link">
-    <span class="md-ellipsis">
-      O Que São Models no dbt-core?
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="O Que São Models no dbt-core?">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#principais-funcionalidades-dos-models" class="md-nav__link">
-    <span class="md-ellipsis">
-      Principais Funcionalidades dos Models
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#vantagens-dos-models-no-dbt-core" class="md-nav__link">
-    <span class="md-ellipsis">
-      Vantagens dos Models no dbt-core
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#exemplo-pratico" class="md-nav__link">
-    <span class="md-ellipsis">
-      Exemplo Prático
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#executando-os-models" class="md-nav__link">
-    <span class="md-ellipsis">
-      Executando os Models
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -473,28 +368,55 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#guia-rapido-e-explicando-os-models-do-dbt-core" class="md-nav__link">
+  <a href="#teoria-sobre-os-models-no-dbt-core" class="md-nav__link">
     <span class="md-ellipsis">
-      Guia rapido e explicando os Models do dbt-core
+      Teoria sobre os Models no dbt-core
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#o-que-sao-models-no-dbt-core" class="md-nav__link">
+  <a href="#o-que-sao-models" class="md-nav__link">
     <span class="md-ellipsis">
-      O Que São Models no dbt-core?
+      O Que São Models?
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="O Que São Models no dbt-core?">
+    <nav class="md-nav" aria-label="O Que São Models?">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#principais-funcionalidades-dos-models" class="md-nav__link">
+  <a href="#estrutura-e-funcionalidade" class="md-nav__link">
     <span class="md-ellipsis">
-      Principais Funcionalidades dos Models
+      Estrutura e Funcionalidade
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#materializacao-dos-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Materialização dos Models
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#referencias-ref" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referências (ref)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemplos-de-uso" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplos de Uso
     </span>
   </a>
   
@@ -510,18 +432,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exemplo-pratico" class="md-nav__link">
+  <a href="#executando-models" class="md-nav__link">
     <span class="md-ellipsis">
-      Exemplo Prático
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#executando-os-models" class="md-nav__link">
-    <span class="md-ellipsis">
-      Executando os Models
+      Executando Models
     </span>
   </a>
   
@@ -547,94 +460,107 @@
                   
 
 
-  <h1>Configuração Inicial</h1>
+  <h1>Models</h1>
 
-<h3 id="guia-rapido-e-explicando-os-models-do-dbt-core">Guia rapido e explicando os Models do dbt-core<a class="headerlink" href="#guia-rapido-e-explicando-os-models-do-dbt-core" title="Permanent link">&para;</a></h3>
-<p>No dbt-core, os <strong>models</strong> são o núcleo do processo de transformação de dados. Eles são arquivos SQL que definem como os dados devem ser transformados e estruturados dentro do seu data warehouse. Vamos entender melhor como os models funcionam e porque eles são tão essenciais no dbt.</p>
-<h2 id="o-que-sao-models-no-dbt-core">O Que São Models no dbt-core?<a class="headerlink" href="#o-que-sao-models-no-dbt-core" title="Permanent link">&para;</a></h2>
-<p>Os models no dbt-core são simplesmente consultas SQL armazenadas em arquivos. Cada model representa uma transformação de dados que você deseja realizar. Esses models podem ser combinados e organizados para criar pipelines de dados complexos de forma eficiente e reutilizável.</p>
-<h3 id="principais-funcionalidades-dos-models">Principais Funcionalidades dos Models<a class="headerlink" href="#principais-funcionalidades-dos-models" title="Permanent link">&para;</a></h3>
+<h3 id="teoria-sobre-os-models-no-dbt-core">Teoria sobre os Models no dbt-core<a class="headerlink" href="#teoria-sobre-os-models-no-dbt-core" title="Permanent link">&para;</a></h3>
+<p>Os <strong>models</strong> no dbt-core são a base sobre a qual a transformação de dados é construída. Eles são arquivos SQL que definem as transformações que os dados brutos precisam passar para se tornarem dados prontos para análise. Vamos explorar a teoria por trás dos models no dbt-core, baseada na documentação oficial.</p>
+<h2 id="o-que-sao-models">O Que São Models?<a class="headerlink" href="#o-que-sao-models" title="Permanent link">&para;</a></h2>
+<p>No dbt-core, um <strong>model</strong> é uma consulta SQL salva como um arquivo <code>.sql</code> dentro do diretório <code>models</code> do seu projeto dbt. Quando você executa <code>dbt run</code>, cada model é convertido em uma tabela ou view no seu data warehouse. Models permitem que você escreva código SQL modular e reutilizável para transformar seus dados de forma eficiente e organizada.</p>
+<h3 id="estrutura-e-funcionalidade">Estrutura e Funcionalidade<a class="headerlink" href="#estrutura-e-funcionalidade" title="Permanent link">&para;</a></h3>
+<p>Os models são criados como arquivos SQL que contêm instruções <code>SELECT</code>. Cada model representa uma transformação específica dos dados. Aqui estão os componentes chave:</p>
 <ol>
-<li><strong>Transformações de Dados</strong>:</li>
+<li><strong>Modelos Básicos</strong>:</li>
 <li>
-<p><strong>Modelos Básicos</strong>: Esses são modelos simples que extraem dados diretamente de tabelas brutas no data warehouse. Eles podem ser usados para filtrar, limpar ou transformar dados iniciais.
-     <code>sql
-     -- models/orders.sql
-     select * from raw_orders_table</code></p>
+<p>Estes são os modelos mais simples, que normalmente representam uma única tabela ou view de dados brutos. Eles podem ser usados para limpar e filtrar os dados.
+   <code>sql
+   -- models/basic_model.sql
+   select *
+   from raw_table
+   where column is not null</code></p>
 </li>
 <li>
-<p><strong>Modelos Dependentes</strong>: Esses modelos dependem de outros models para obter seus dados. Eles utilizam a função <code>{{ ref('model_name') }}</code> para referenciar outros modelos, criando uma hierarquia de dependências. Isso assegura que as transformações sejam realizadas na ordem correta.
-     <code>sql
-     -- models/total_revenues_1997.sql
-     with ord as (
-         select order_id 
-         from {{ ref('orders') }}
-         where extract(year from order_date) = 1997
-     )
-     select 
-         sum(order_details.unit_price * order_details.quantity * (1.0 - order_details.discount)) as total_revenues_1997
-     from 
-         {{ ref('order_details') }} 
-     inner join 
-         ord 
-     on 
-         ord.order_id = order_details.order_id</code></p>
+<p><strong>Modelos Derivados</strong>:</p>
 </li>
-<li>
-<p><strong>Materialização dos Models</strong>:</p>
-</li>
-<li>O dbt-core permite definir como os models devem ser materializados no banco de dados. Você pode materializá-los como tabelas (<code>table</code>), views (<code>view</code>), ou outras formas dependendo das suas necessidades de desempenho e armazenamento.
-     <code>yaml
-     models:
-       my_project:
-         orders:
-           materialized: table
-         order_details:
-           materialized: table
-         total_revenues_1997:
-           materialized: view</code></li>
+<li>Estes modelos dependem de outros models para seus dados de entrada. Utilizando a função <code>{{ ref('model_name') }}</code>, dbt garante que as dependências entre modelos sejam gerenciadas corretamente.
+   <code>sql
+   -- models/derived_model.sql
+   select *
+   from {{ ref('basic_model') }}
+   where another_column &gt; 10</code></li>
 </ol>
+<h3 id="materializacao-dos-models">Materialização dos Models<a class="headerlink" href="#materializacao-dos-models" title="Permanent link">&para;</a></h3>
+<p>No dbt-core, você pode definir como deseja que cada model seja materializado no data warehouse. As opções de materialização incluem:</p>
+<ul>
+<li>
+<p><strong>View</strong>: Cria uma view no data warehouse. Útil quando você deseja sempre ter dados atualizados, mas sem duplicar dados.
+  <code>yaml
+  models:
+    my_project:
+      view_model:
+        materialized: view</code></p>
+</li>
+<li>
+<p><strong>Table</strong>: Cria uma tabela física no data warehouse. Útil para melhorar o desempenho de consultas complexas.
+  <code>yaml
+  models:
+    my_project:
+      table_model:
+        materialized: table</code></p>
+</li>
+<li>
+<p><strong>Incremental</strong>: Permite a atualização incremental dos dados. Útil para grandes conjuntos de dados onde a carga completa seria ineficiente.
+  <code>yaml
+  models:
+    my_project:
+      incremental_model:
+        materialized: incremental
+        unique_key: id</code></p>
+</li>
+</ul>
+<h3 id="referencias-ref">Referências (<code>ref</code>)<a class="headerlink" href="#referencias-ref" title="Permanent link">&para;</a></h3>
+<p>A função <code>{{ ref('model_name') }}</code> é usada para criar dependências entre models. Ela informa ao dbt que um model depende de outro, garantindo que os models sejam executados na ordem correta. Isso também facilita a manutenção e o entendimento do fluxo de dados.</p>
+<h3 id="exemplos-de-uso">Exemplos de Uso<a class="headerlink" href="#exemplos-de-uso" title="Permanent link">&para;</a></h3>
+<p>Aqui estão alguns exemplos de como models podem ser utilizados no dbt-core:</p>
+<ul>
+<li>
+<p><strong>Modelos de Limpeza de Dados</strong>:
+  <code>sql
+  -- models/cleaned_data.sql
+  select
+    id,
+    trim(name) as name,
+    cast(price as decimal) as price
+  from
+    {{ ref('raw_data') }}
+  where
+    name is not null</code></p>
+</li>
+<li>
+<p><strong>Modelos de Agregação de Dados</strong>:
+  <code>sql
+  -- models/aggregated_data.sql
+  select
+    category,
+    sum(price) as total_price
+  from
+    {{ ref('cleaned_data') }}
+  group by
+    category</code></p>
+</li>
+</ul>
 <h3 id="vantagens-dos-models-no-dbt-core">Vantagens dos Models no dbt-core<a class="headerlink" href="#vantagens-dos-models-no-dbt-core" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Reutilização e Modularidade</strong>: Models podem ser facilmente reutilizados em diferentes partes do pipeline de dados. Isso permite que você construa transformações complexas a partir de blocos menores e mais simples.</li>
-<li><strong>Gestão de Dependências</strong>: Com a função <code>{{ ref('model_name') }}</code>, dbt-core gerencia automaticamente a ordem de execução dos models, garantindo que todas as dependências sejam resolvidas corretamente.</li>
-<li><strong>Facilidade de Manutenção</strong>: Como os models são escritos em SQL, uma linguagem amplamente conhecida e utilizada, a manutenção e atualização das transformações de dados tornam-se mais simples e acessíveis a uma ampla gama de profissionais de dados.</li>
+<li><strong>Modularidade</strong>: Models permitem que você divida transformações complexas em partes menores e mais gerenciáveis.</li>
+<li><strong>Reutilização</strong>: Models podem ser reutilizados em diferentes partes do seu projeto, evitando duplicação de código.</li>
+<li><strong>Clareza</strong>: A estrutura clara e a utilização de referências (<code>ref</code>) tornam o pipeline de dados fácil de entender e manter.</li>
+<li><strong>Desempenho</strong>: A materialização como tabelas pode melhorar o desempenho de consultas complexas, enquanto views garantem dados sempre atualizados.</li>
 </ul>
-<h3 id="exemplo-pratico">Exemplo Prático<a class="headerlink" href="#exemplo-pratico" title="Permanent link">&para;</a></h3>
-<p>Vamos considerar um exemplo prático de como os models são utilizados no dbt-core para transformar dados do banco de dados de demonstração Northwind.</p>
-<ul>
-<li>
-<p><strong>Modelo Básico</strong>:
-  <code>sql
-  -- models/orders.sql
-  select * from raw_orders_table</code></p>
-</li>
-<li>
-<p><strong>Modelo Dependente</strong>:
-  <code>sql
-  -- models/total_revenues_1997.sql
-  with ord as (
-      select order_id 
-      from {{ ref('orders') }}
-      where extract(year from order_date) = 1997
-  )
-  select 
-      sum(order_details.unit_price * order_details.quantity * (1.0 - order_details.discount)) as total_revenues_1997
-  from 
-      {{ ref('order_details') }} 
-  inner join 
-      ord 
-  on 
-      ord.order_id = order_details.order_id</code></p>
-</li>
-</ul>
-<h3 id="executando-os-models">Executando os Models<a class="headerlink" href="#executando-os-models" title="Permanent link">&para;</a></h3>
-<p>Para compilar e executar os models, utilizamos o comando <code>dbt run</code>:</p>
+<h3 id="executando-models">Executando Models<a class="headerlink" href="#executando-models" title="Permanent link">&para;</a></h3>
+<p>Para executar os models e aplicar as transformações de dados, você utiliza o comando <code>dbt run</code>. Este comando compila os models e executa as consultas SQL no seu data warehouse, criando ou atualizando as tabelas e views conforme definido.</p>
 <pre><code class="language-sh">dbt run
 </code></pre>
-<p>Isso cria as tabelas e views definidas no data warehouse, transformando os dados brutos em dados prontos para análise.</p>
 <hr />
-<p>Os models no dbt-core são essenciais para qualquer pipeline de dados moderno, proporcionando uma forma clara, reutilizável e eficiente de transformar e organizar dados. Esperamos que esta explicação ajude você a entender melhor como utilizar os models no dbt-core para maximizar o valor dos seus dados.</p>
+<p>Os models no dbt-core são fundamentais para construir pipelines de dados robustos e eficientes. Eles oferecem uma maneira estruturada e modular de transformar dados brutos em dados prontos para análise, aproveitando ao máximo as capacidades do seu data warehouse.</p>
 
 
 
