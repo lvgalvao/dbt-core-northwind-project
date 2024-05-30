@@ -4,7 +4,7 @@
 
 Apresentar de forma prática uma solução completa de dados aproveitando os principais módulos e funcionalidades do dbt-core. Toda infra de dados com um Postgres na AWS.
 
-![Texto alternativo](pics/overview.png)
+![Texto alternativo](./pics/overview.png)
 
 A ferramenta dbt (data build tool) é uma solução inovadora no campo da engenharia de dados, projetada para conectar-se a repositórios de dados centralizados como Data Warehouses e Data Lakes. Ela habilita usuários de negócios, analistas e engenheiros a gerar transformações de dados, regras de negócios e insights valiosos de forma autônoma e eficiente.
 
@@ -17,6 +17,8 @@ A ferramenta dbt (data build tool) é uma solução inovadora no campo da engenh
 
 Esse projeto faz parte da comunidade de estudo Jornada de dados
 Nossa missão é **fornecer o melhor ensino em engenharia de dados**
+
+![Texto alternativo](./pics/jornada.png)
 
 Se você quer:
 
@@ -31,6 +33,8 @@ A **Jornada de Dados** é o seu lugar
 ## O que é dbt?
 
 O dbt é uma ferramenta focada na transformação de dados dentro de um pipeline de ETL/ELT, onde ETL significa Extrair, Transformar e Carregar. Ele se concentra especificamente no aspecto de Transformação (T), permitindo a criação de fluxos de trabalho de transformação de dados usando SQL.
+
+![Vamos utilizar o case Northwind](./pics/overview.png)
 
 ## Origem e Evolução
 
