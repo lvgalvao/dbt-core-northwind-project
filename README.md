@@ -1,17 +1,32 @@
-# dbt-core-Northwind-project
+# dbt-core-northwind-project
 
-Este projeto cria um data warehouse completo utilizando PostgreSQL instanciado na AWS. Usando dbt-core, transformamos dados do Database Northwind para gerar relatórios detalhados. 
+## Arquitetura moderna utilizando dbt-core e postgres na AWS
 
-O objetivo é demonstrar como construir uma infraestrutura de dados moderna e eficiente, e como usar dbt-core para criar modelos de dados e relatórios.
-
-# dbt-core: Transformação de Dados para Engenharia de Dados
-
-## Introdução
-
-A ferramenta dbt (data build tool) é uma solução inovadora no campo da engenharia de dados, projetada para conectar-se a repositórios de dados centralizados como Data Warehouses e Data Lakes. Ela habilita usuários de negócios, analistas e engenheiros a gerar transformações de dados, regras de negócios e insights valiosos de forma autônoma e eficiente.
+Apresentar de forma prática uma solução completa de dados aproveitando os principais módulos e funcionalidades do dbt-core. Toda infra de dados com um Postgres na AWS.
 
 ![Texto alternativo](pics/overview.png)
 
+A ferramenta dbt (data build tool) é uma solução inovadora no campo da engenharia de dados, projetada para conectar-se a repositórios de dados centralizados como Data Warehouses e Data Lakes. Ela habilita usuários de negócios, analistas e engenheiros a gerar transformações de dados, regras de negócios e insights valiosos de forma autônoma e eficiente.
+
+## Guia
+
+- Se você é novo com sql, recomendamos que faça até a [aula 05 do bootcamp de SQL](https://github.com/lvgalvao/Northwind-SQL-Analytics/tree/main)
+- Se você é novo no dbt-core, recomendo que leia o Guía rápido para criar o seu primeiro modelo
+
+## Jornada de Dados
+
+Esse projeto faz parte da comunidade de estudo Jornada de dados
+Nossa missão é **fornecer o melhor ensino em engenharia de dados**
+
+Se você quer:
+
+1) Construir uma **base sólida** em Python e SQL
+2) Aprender as **principais habilidades e ferramentas** de engenharia de dados
+3) Criar ou melhorar seu **portfólio** de dados
+4) Criar ou aumentar o seu **networking** na área
+5) Mudar ou dar o **próximo passo em sua carreira**
+
+A **Jornada de Dados** é o seu lugar
 
 ## O que é dbt?
 
@@ -200,15 +215,4 @@ from
     employee_cities e
 full outer join 
     customer_cities c on e.city = c.city
-```
-
-### Estrutura Geral (MermaidJS)
-
-```mermaid
-graph TD
-    A[Clientes] --> B[Pedidos]
-    A --> C[Relatórios]
-    B --> C
-    D[Empregados] --> C
-    D --> B
 ```
