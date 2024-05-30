@@ -1,1 +1,47 @@
-site_name: My Docs
+# mkdocs.yml
+
+site_name: 'Data Warehouse Moderno com dbt-core e PostgreSQL na AWS'
+site_description: 'Guia para construir um data warehouse moderno utilizando dbt-core e PostgreSQL na AWS.'
+site_author: 'Seu Nome'
+
+# Configurações do tema Material
+theme:
+  name: 'material'
+  language: 'pt'
+  palette:
+    primary: 'indigo'
+    accent: 'indigo'
+  font:
+    text: 'Roboto'
+    code: 'Roboto Mono'
+  features:
+    - navigation.tabs
+    - navigation.top
+    - search.highlight
+    - search.suggest
+  logo: 'images/logo.svg'  # Caminho para o logotipo do site (opcional)
+  favicon: 'images/logo.svg'  # Caminho para o favicon (opcional)
+
+# Configurações de navegação
+nav:
+  - Home: index.md
+  - Guia Rápido:
+      - 'Bem-vindo': guides/bem_vindo.md
+      - 'Configuração Inicial': guides/guia_rapido.md
+
+# Plugins
+plugins:
+  - search
+
+# Configurações extras
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: 'https://github.com/seu-usuario/nome-do-repositorio'
+    - icon: fontawesome/brands/linkedin
+      link: 'https://www.linkedin.com/in/lucianovasconcelosf/'
+
+# Configurações para Markdown
+markdown_extensions:
+  - toc:
+      permalink: true
