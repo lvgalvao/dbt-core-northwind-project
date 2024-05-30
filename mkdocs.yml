@@ -1,8 +1,8 @@
 # mkdocs.yml
 
-site_name: 'Data Warehouse Moderno com dbt-core e PostgreSQL na AWS'
+site_name: dbt-core
 site_description: 'Guia para construir um data warehouse moderno utilizando dbt-core e PostgreSQL na AWS.'
-site_author: 'Seu Nome'
+site_author: 'Luciano Vasconcelos'
 
 # Configurações do tema Material
 theme:
@@ -15,10 +15,16 @@ theme:
     text: 'Roboto'
     code: 'Roboto Mono'
   features:
-    - navigation.tabs
-    - navigation.top
-    - search.highlight
     - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - navigation.indexes
+    - content.tooltips
+    - navigation.path
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - navigation.tabs
   logo: 'images/logo.svg'  # Caminho para o logotipo do site (opcional)
   favicon: 'images/logo.svg'  # Caminho para o favicon (opcional)
 
@@ -40,6 +46,9 @@ extra:
       link: 'https://github.com/seu-usuario/nome-do-repositorio'
     - icon: fontawesome/brands/linkedin
       link: 'https://www.linkedin.com/in/lucianovasconcelosf/'
+
+repo_name: lvgalvao/dbt-core-northwind-project
+repo_url: https://github.com/lvgalvao/dbt-core-northwind-project
 
 # Configurações para Markdown
 markdown_extensions:
