@@ -118,3 +118,8 @@ A documentação é gerada automaticamente, proporcionando uma visão clara da l
 4. **Importe o Northwind Demo Database**:
    - Baixe o script SQL do Northwind Demo Database.
    - Conecte-se ao PostgreSQL usando um cliente SQL (ex: pgAdmin, DBeaver) e execute o script para criar o banco de dados.
+
+
+## Veja a documentação completa**:
+
+[![Documentacao](./pics/doc.png)](https://lvgalvao.github.io/dbt-core-northwind-project/)
