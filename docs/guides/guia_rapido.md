@@ -1,41 +1,68 @@
-# Documentação do bootcamp de dbt-core
+### Guia rapido e explicando os Models do dbt-core
 
-O erro indica que o dbt não conseguiu encontrar a tabela `orders` que foi referenciada no modelo `total_revenues_1997.sql`. Para resolver isso, você precisa garantir que os modelos ou tabelas que você está referenciando com `{{ ref('orders') }}` e `{{ ref('order_details') }}` existem e estão corretos.
+No dbt-core, os **models** são o núcleo do processo de transformação de dados. Eles são arquivos SQL que definem como os dados devem ser transformados e estruturados dentro do seu data warehouse. Vamos entender melhor como os models funcionam e porque eles são tão essenciais no dbt.
 
-Vamos revisar o processo e os possíveis ajustes:
+## O Que São Models no dbt-core?
 
-1. **Verifique os nomes dos modelos**:
-   - Certifique-se de que os modelos `orders` e `order_details` existem e estão corretamente definidos em seus arquivos de modelo no diretório `models`.
+Os models no dbt-core são simplesmente consultas SQL armazenadas em arquivos. Cada model representa uma transformação de dados que você deseja realizar. Esses models podem ser combinados e organizados para criar pipelines de dados complexos de forma eficiente e reutilizável.
 
-2. **Uso de `ref` corretamente**:
-   - Garanta que você está utilizando `{{ ref('orders') }}` e `{{ ref('order_details') }}` corretamente, e que esses modelos foram compilados sem erros.
+### Principais Funcionalidades dos Models
 
-### Passos Detalhados:
+1. **Transformações de Dados**:
+   - **Modelos Básicos**: Esses são modelos simples que extraem dados diretamente de tabelas brutas no data warehouse. Eles podem ser usados para filtrar, limpar ou transformar dados iniciais.
+     ```sql
+     -- models/orders.sql
+     select * from raw_orders_table
+     ```
 
-#### Passo 1: Verifique a Existência dos Modelos
+   - **Modelos Dependentes**: Esses modelos dependem de outros models para obter seus dados. Eles utilizam a função `{{ ref('model_name') }}` para referenciar outros modelos, criando uma hierarquia de dependências. Isso assegura que as transformações sejam realizadas na ordem correta.
+     ```sql
+     -- models/total_revenues_1997.sql
+     with ord as (
+         select order_id 
+         from {{ ref('orders') }}
+         where extract(year from order_date) = 1997
+     )
+     select 
+         sum(order_details.unit_price * order_details.quantity * (1.0 - order_details.discount)) as total_revenues_1997
+     from 
+         {{ ref('order_details') }} 
+     inner join 
+         ord 
+     on 
+         ord.order_id = order_details.order_id
+     ```
 
-- **Verifique se existem arquivos SQL para `orders` e `order_details` na pasta `models`**.
-  - Por exemplo, você deve ter algo como `orders.sql` e `order_details.sql`.
+2. **Materialização dos Models**:
+   - O dbt-core permite definir como os models devem ser materializados no banco de dados. Você pode materializá-los como tabelas (`table`), views (`view`), ou outras formas dependendo das suas necessidades de desempenho e armazenamento.
+     ```yaml
+     models:
+       my_project:
+         orders:
+           materialized: table
+         order_details:
+           materialized: table
+         total_revenues_1997:
+           materialized: view
+     ```
 
-#### Passo 2: Defina os Modelos Base
+### Vantagens dos Models no dbt-core
 
-Se não existirem, crie-os.
+- **Reutilização e Modularidade**: Models podem ser facilmente reutilizados em diferentes partes do pipeline de dados. Isso permite que você construa transformações complexas a partir de blocos menores e mais simples.
+- **Gestão de Dependências**: Com a função `{{ ref('model_name') }}`, dbt-core gerencia automaticamente a ordem de execução dos models, garantindo que todas as dependências sejam resolvidas corretamente.
+- **Facilidade de Manutenção**: Como os models são escritos em SQL, uma linguagem amplamente conhecida e utilizada, a manutenção e atualização das transformações de dados tornam-se mais simples e acessíveis a uma ampla gama de profissionais de dados.
 
-- **models/orders.sql**:
+### Exemplo Prático
+
+Vamos considerar um exemplo prático de como os models são utilizados no dbt-core para transformar dados do banco de dados de demonstração Northwind.
+
+- **Modelo Básico**:
   ```sql
   -- models/orders.sql
-  select * from raw_orders_table  -- Substitua 'raw_orders_table' pelo nome real da tabela no seu banco de dados.
+  select * from raw_orders_table
   ```
 
-- **models/order_details.sql**:
-  ```sql
-  -- models/order_details.sql
-  select * from raw_order_details_table  -- Substitua 'raw_order_details_table' pelo nome real da tabela no seu banco de dados.
-  ```
-
-#### Passo 3: Atualize o Modelo `total_revenues_1997.sql`
-
-- **models/total_revenues_1997.sql**:
+- **Modelo Dependente**:
   ```sql
   -- models/total_revenues_1997.sql
   with ord as (
@@ -53,34 +80,16 @@ Se não existirem, crie-os.
       ord.order_id = order_details.order_id
   ```
 
-#### Passo 4: Atualize o `dbt_project.yml`
+### Executando os Models
 
-- Garanta que o `dbt_project.yml` está configurado para incluir esses modelos.
-
-```yaml
-models:
-  northwind:
-    orders:
-      materialized: table
-    order_details:
-      materialized: table
-    total_revenues_1997:
-      materialized: view
-```
-
-#### Passo 5: Execute o dbt
-
-- Agora, execute `dbt run` novamente.
+Para compilar e executar os models, utilizamos o comando `dbt run`:
 
 ```sh
 dbt run
 ```
 
-### Resumo:
+Isso cria as tabelas e views definidas no data warehouse, transformando os dados brutos em dados prontos para análise.
 
-1. Verifique e crie os modelos `orders.sql` e `order_details.sql` se necessário.
-2. Use `{{ ref('orders') }}` e `{{ ref('order_details') }}` para referenciar esses modelos no seu `total_revenues_1997.sql`.
-3. Garanta que o `dbt_project.yml` está corretamente configurado.
-4. Execute `dbt run` para compilar e criar os modelos no seu data warehouse.
+---
 
-Seguindo esses passos, você deve ser capaz de resolver o erro de compilação e criar a `view` `total_revenues_1997_view` corretamente usando dbt.
+Os models no dbt-core são essenciais para qualquer pipeline de dados moderno, proporcionando uma forma clara, reutilizável e eficiente de transformar e organizar dados. Esperamos que esta explicação ajude você a entender melhor como utilizar os models no dbt-core para maximizar o valor dos seus dados.
