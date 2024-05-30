@@ -34,6 +34,7 @@ nav:
   - Guia Rápido:
       - 'Bem-vindo': guides/bem_vindo.md
       - 'Configuração Inicial': guides/guia_rapido.md
+      - 'Configuração Testes': guides/testes.md
   - Conteúdo:
       - 'dbt models': reference/models.md
       - 'Projeto': reference/projeto.md

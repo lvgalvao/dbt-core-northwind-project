@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  dbt:
+    build: .
+    environment:
+      DBT_PROFILES_DIR: /root/.dbt
+      DB_NAME: ${DB_NAME}
+      DB_HOST: ${DB_HOST}
+      DB_PASS: ${DB_PASS}
+      DB_PORT: ${DB_PORT}
+      DB_SCHEMA: ${DB_SCHEMA}
+      DB_THREADS: ${DB_THREADS}
+      DB_TYPE: ${DB_TYPE}
+      DB_USER: ${DB_USER}
+    volumes:
+      - .:/app
+      - ./dbt/target:/northwind/dbt/target
+    command: ["sh", "-c", "dbt docs generate --project-dir ./dbt && tail -f /dev/null"]
