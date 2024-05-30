@@ -37,6 +37,7 @@ nav:
   - Conteúdo:
       - 'dbt models': reference/models.md
       - 'Projeto': reference/projeto.md
+      - 'Plataformas suportadas': reference/supported_data_plarforms.md      
 
 # Plugins
 plugins:
