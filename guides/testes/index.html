@@ -13,6 +13,10 @@
       
       
       
+        <link rel="prev" href="../guia_rapido/">
+      
+      
+        <link rel="next" href="../../reference/models/">
       
       
       <link rel="icon" href="../../images/logo.svg">
@@ -20,7 +24,7 @@
     
     
       
-        <title>Testes - Bootcamp dbt-core</title>
+        <title>Configuração Testes - Bootcamp dbt-core</title>
       
     
     
@@ -103,7 +107,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Testes
+              Configuração Testes
             
           </span>
         </div>
@@ -201,10 +205,12 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../bem_vindo/" class="md-tabs__link">
           
   
@@ -306,8 +312,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -320,17 +328,20 @@
     
     
       
+        
+        
+      
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -341,7 +352,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             Guia Rápido
@@ -394,10 +405,28 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../tests.md" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Configuração Testes
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -406,6 +435,225 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#configurando-testes-no-dbt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configurando Testes no dbt
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configurando Testes no dbt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemplo-de-arquivo-yaml-com-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo de Arquivo YAML com Testes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executando-testes-no-dbt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executando Testes no dbt
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#visualizando-testes-no-dbt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualizando Testes no dbt
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Visualizando Testes no dbt">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#gerar-documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gerar Documentação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#servir-a-documentacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Servir a Documentação
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-completo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo Completo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo Completo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-stg_customerssql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo stg_customers.sql
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-stg_orderssql" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo stg_orders.sql
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#arquivo-schemayml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arquivo schema.yml
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resumo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resumo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tipagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tipagem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#passos-para-verificar-tipagem-das-colunas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passos para Verificar Tipagem das Colunas
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemplo-de-schemayml-com-verificacao-de-tipagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemplo de schema.yml com Verificação de Tipagem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exemplo de schema.yml com Verificação de Tipagem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schemayml-no-diretorio-staging" class="md-nav__link">
+    <span class="md-ellipsis">
+      schema.yml no Diretório staging
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usar-o-dbt-utils-para-testar-tipagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usar o dbt-utils para Testar Tipagem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usar o dbt-utils para Testar Tipagem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#adicionar-dbt-utils-ao-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adicionar dbt-utils ao Projeto
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executar-os-testes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executar os Testes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -777,7 +1025,7 @@
   
 
 
-  <h1>Testes</h1>
+  <h1>Configuração Testes</h1>
 
 <p>Para visualizar e executar os testes no dbt, você pode seguir alguns passos e utilizar as ferramentas que o dbt oferece para garantir que suas transformações de dados estão funcionando conforme o esperado. Aqui estão as etapas para configurar, executar e visualizar os testes no dbt:</p>
 <h3 id="configurando-testes-no-dbt">Configurando Testes no dbt<a class="headerlink" href="#configurando-testes-no-dbt" title="Permanent link">&para;</a></h3>
