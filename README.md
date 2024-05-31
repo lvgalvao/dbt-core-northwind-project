@@ -36,99 +36,78 @@ O dbt é uma ferramenta focada na transformação de dados dentro de um pipeline
 
 ![Vamos utilizar o case Northwind](./pics/northwind.png)
 
-## Origem e Evolução
+## Pré-requisitos
 
-Criado em 2016 para endereçar desafios de unidade e orquestração em SQL, o dbt ganhou tração com a popularização de Data Warehouses em cloud como Redshift, BigQuery, Azure Synapse e Snowflake. Seu desenvolvimento foi impulsionado tanto pela equipe original quanto por uma vibrante comunidade de código aberto.
+Antes de começar, certifique-se de ter os seguintes softwares instalados em seu sistema:
 
-## Princípios Fundamentais do dbt
+- [Git](https://git-scm.com/downloads): Para clonar o repositório.
+- [Docker](https://www.docker.com/products/docker-desktop): Para executar os contêineres do PostgreSQL, pgAdmin e dbt.
 
-### SQL para Desenvolvimento Rápido
+## Instruções de Instalação
 
-O dbt utiliza SQL, juntamente com a linguagem de templates Jinja, permitindo a reutilização e modularização do código SQL.
+### 1. Clonar o Repositório
 
-### Controle de Versão e Trabalho Colaborativo
+Primeiro, clone este repositório para o seu ambiente local usando Git. Abra um terminal e execute o seguinte comando:
 
-Com integração Git, o dbt facilita a colaboração e o controle de versões, essencial para pipelines de dados robustos e confiáveis.
+```sh
+git clone https://github.com/seu-usuario/dbt-core-northwind-project.git
+cd dbt-core-northwind-project
+```
 
-### Qualidade e Testes
+### 2. Executar os Contêineres Docker
 
-O dbt suporta integração e entrega contínuas, juntamente com testes automatizados, garantindo a integridade e a eficácia das transformações de dados.
+Com o Docker instalado, navegue até o diretório do projeto clonado e execute os seguintes comandos para iniciar os contêineres:
 
-### Documentação e Linhagem de Dados
+```sh
+docker-compose up --build
+```
 
-A documentação é gerada automaticamente, proporcionando uma visão clara da linhagem dos dados e facilitando a rastreabilidade e a compreensão das transformações.
+Isso iniciará os contêineres necessários: PostgreSQL, pgAdmin, dbt-core e dbt-docs.
 
-## Estrutura do Projeto
+### 3. Acessar pgAdmin
 
-- **AWS RDS PostgreSQL**: Instância de banco de dados PostgreSQL.
-- **dbt-core**: Ferramenta de transformação de dados para criar modelos e gerar relatórios.
-- **Northwind Demo Database**: Banco de dados de exemplo utilizado para os dados de entrada.
+Uma vez que os contêineres estiverem em execução, você pode acessar o pgAdmin no seu navegador:
 
-## Relatórios Gerados
+- URL: `http://localhost:5050`
+- Senha: `postgres`
 
-1. **Relatório de Pedidos de 1996 e seus Clientes**:
-   - Mostra todos os pedidos feitos em 1996 e os detalhes dos clientes que fizeram esses pedidos.
-   
-2. **Número de Empregados e Clientes por Cidade com Empregados**:
-   - Exibe o número de empregados e clientes em cada cidade que possui empregados.
-   
-3. **Número de Empregados e Clientes por Cidade com Clientes**:
-   - Exibe o número de empregados e clientes em cada cidade que possui clientes.
-   
-4. **Número de Empregados e Clientes por Cidade**:
-   - Exibe o número de empregados e clientes em cada cidade.
+### 4. Acessar a Documentação do dbt
 
-## Configuração do Projeto
+Para acessar a documentação gerada pelo dbt, abra seu navegador e vá para:
 
-### Pré-requisitos
+- URL: `http://localhost:8080`
 
-- Conta na AWS com permissões para criar instâncias RDS e configurar VPCs.
-- Python 3.6 ou superior.
-- dbt-core.
+### 5. Conectar ao Banco de Dados
 
-### Instalação
+No pgAdmin, adicione um novo servidor com as seguintes configurações:
 
-1. **Clone o repositório**:
-   ```sh
-   git clone git@github.com:lvgalvao/dbt-core-northwind-project.git
-   cd dbt-core-northwind-project
-   ```
+- Nome: `db`
+- Host: `db`
+- Porta: `5432`
+- Usuário: `postgres`
+- Senha: `postgres`
 
-2. **Instale os requisitos do projeto**:
-   ```sh
-   pip install -r requirements
-   ```
+### Estrutura do Projeto
 
-3. **Configure a conexão dbt**:
-   Crie um arquivo `profiles.yml` na pasta `~/.dbt/` com o seguinte conteúdo:
-   ```yaml
-   northwind_project:
-     outputs:
-       dev:
-         type: postgres
-         host: your-aws-rds-endpoint
-         user: your-username
-         password: your-password
-         dbname: northwind
-         schema: public
-         port: 5432
-     target: dev
-   ```
+- **dbt**: Contém os arquivos de configuração e scripts do dbt.
+- **docker-compose.yml**: Define os serviços Docker necessários para o projeto.
+- **profiles.yml**: Configurações do perfil do dbt.
 
-4. **Importe o Northwind Demo Database**:
-   - Baixe o script SQL do Northwind Demo Database.
-   - Conecte-se ao PostgreSQL usando um cliente SQL (ex: pgAdmin, DBeaver) e execute o script para criar o banco de dados.
+### Comandos dbt
 
+Você pode executar comandos dbt dentro do contêiner `dbt-core`. Para abrir um terminal interativo no contêiner, execute:
 
-## Veja a documentação completa**:
+```sh
+docker exec -it dbt-core /bin/bash
+```
 
-[![Documentacao](./pics/doc.png)](https://lvgalvao.github.io/dbt-core-northwind-project/)
+Dentro do contêiner, você pode usar comandos dbt, como:
 
-## Executar Testes e Gerar Documentação
-
-```bash
+```sh
 dbt run
 dbt test
-dbt docs generate
-dbt docs serve
 ```
+
+## Contribuição
+
+Sinta-se à vontade para contribuir com este projeto. Crie um fork, faça suas alterações e envie um pull request.

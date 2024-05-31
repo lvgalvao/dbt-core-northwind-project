@@ -1,19 +1,115 @@
-version: '3.8'
+version: '3'
 
 services:
-  dbt:
-    build: .
+  db:
+    container_name: db
+    image: postgres:latest
     environment:
-      DBT_PROFILES_DIR: /root/.dbt
-      DB_NAME: ${DB_NAME}
-      DB_HOST: ${DB_HOST}
-      DB_PASS: ${DB_PASS}
-      DB_PORT: ${DB_PORT}
-      DB_SCHEMA: ${DB_SCHEMA}
-      DB_THREADS: ${DB_THREADS}
-      DB_TYPE: ${DB_TYPE}
-      DB_USER: ${DB_USER}
+      POSTGRES_DB: northwind
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     volumes:
-      - .:/app
-      - ./dbt/target:/northwind/dbt/target
-    command: ["sh", "-c", "dbt docs generate --project-dir ./dbt && tail -f /dev/null"]
+      - postgresql_bin:/usr/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+      - ./northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
+      - ./files:/files
+    ports:
+      - 55432:5432
+    networks:
+      - db
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: postgres
+      PGADMIN_LISTEN_PORT: 5050
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - postgresql_bin:/usr/lib/postgresql
+      - pgadmin_root_prefs:/root/.pgadmin
+      - pgadmin_working_dir:/var/lib/pgadmin
+      - ./files:/files
+    ports:
+      - 5050:5050
+    networks:
+      - db
+
+  dbt-core:
+    container_name: dbt-core
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DBT_PROFILES_DIR: /northwind
+      DB_NAME_DEV: northwind
+      DB_HOST_DEV: db
+      DB_PASS_DEV: postgres
+      DB_PORT_DEV: 5432
+      DB_SCHEMA_DEV: public
+      DB_THREADS_DEV: 1
+      DB_TYPE_DEV: postgres
+      DB_USER_DEV: postgres
+      DB_NAME_PROD: ${DB_NAME_PROD}
+      DB_HOST_PROD: ${DB_HOST_PROD}
+      DB_PASS_PROD: ${DB_PASS_PROD}
+      DB_PORT_PROD: ${DB_PORT_PROD}
+      DB_SCHEMA_PROD: ${DB_SCHEMA_PROD}
+      DB_THREADS_PROD: ${DB_THREADS_PROD}
+      DB_TYPE_PROD: ${DB_TYPE_PROD}
+      DB_USER_PROD: ${DB_USER_PROD}
+    volumes:
+      - .:/usr/app
+      - ./dbt/target:/usr/app/dbt/target
+      - ./profiles.yml:/northwind/profiles.yml
+    networks:
+      - db
+
+  dbt-docs:
+    container_name: dbt-docs
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      DBT_PROFILES_DIR: /northwind
+      DB_NAME_DEV: northwind
+      DB_HOST_DEV: db
+      DB_PASS_DEV: postgres
+      DB_PORT_DEV: 5432
+      DB_SCHEMA_DEV: public
+      DB_THREADS_DEV: 1
+      DB_TYPE_DEV: postgres
+      DB_USER_DEV: postgres
+      DB_NAME_PROD: ${DB_NAME_PROD}
+      DB_HOST_PROD: ${DB_HOST_PROD}
+      DB_PASS_PROD: ${DB_PASS_PROD}
+      DB_PORT_PROD: ${DB_PORT_PROD}
+      DB_SCHEMA_PROD: ${DB_SCHEMA_PROD}
+      DB_THREADS_PROD: ${DB_THREADS_PROD}
+      DB_TYPE_PROD: ${DB_TYPE_PROD}
+      DB_USER_PROD: ${DB_USER_PROD}
+    volumes:
+      - .:/usr/app
+      - ./dbt/target:/usr/app/dbt/target
+      - ./profiles.yml:/northwind/profiles.yml
+    entrypoint: ["sh", "-c"]
+    command: ["dbt docs generate --target dev && dbt docs serve --no-browser"]
+    ports:
+      - 8080:8080
+    networks:
+      - db
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  pgadmin_root_prefs:
+    driver: local
+  pgadmin_working_dir:
+    driver: local
+  postgresql_data:
+    driver: local
+  postgresql_bin:
+    driver: local
