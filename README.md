@@ -36,6 +36,10 @@ O dbt é uma ferramenta focada na transformação de dados dentro de um pipeline
 
 ![Vamos utilizar o case Northwind](./pics/northwind.png)
 
+## Veja a documentação completa**:
+
+[![Documentacao](./pics/doc.png)](https://lvgalvao.github.io/dbt-core-northwind-project/)
+
 ## Pré-requisitos
 
 Antes de começar, certifique-se de ter os seguintes softwares instalados em seu sistema:
