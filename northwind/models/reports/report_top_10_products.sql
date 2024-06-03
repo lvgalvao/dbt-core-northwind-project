@@ -1,5 +1,10 @@
 -- models/reporting/top_10_products.sql
 
+{{ config(
+    schema='gold',
+    materialized='table'
+) }}
+
 select
     products.product_name, 
     sum(order_details.unit_price * order_details.quantity * (1.0 - order_details.discount)) as sales

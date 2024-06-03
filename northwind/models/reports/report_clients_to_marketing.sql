@@ -1,5 +1,10 @@
 -- models/reporting/clients_to_marketing.sql
 
+{{ config(
+    schema='gold',
+    materialized='table'
+) }}
+
 with clientes_para_marketing as (
     select 
         customers.company_name, 

@@ -1,5 +1,10 @@
 -- models/reporting/view_total_revenues_per_customer_group.sql
 
+{{ config(
+    schema='gold',
+    materialized='table'
+) }}
+
 select 
     customers.company_name, 
     sum(order_details.unit_price * order_details.quantity * (1.0 - order_details.discount)) as total,
