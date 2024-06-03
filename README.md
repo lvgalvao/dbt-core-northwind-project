@@ -39,12 +39,6 @@ A ferramenta dbt (data build tool) é uma solução inovadora no campo da engenh
 
 O objetivo deste projeto é implementar uma solução de dados que foi inicialmente desenvolvida utilizando um processo padrão no PostgreSQL (criação de tabelas, views, procedures, etc.), mas agora utilizando dbt-core. A proposta é comparar as duas abordagens para evidenciar as vantagens e simplificações que o dbt-core pode oferecer em termos de manutenção, colaboração e escalabilidade das transformações de dados.
 
-## Como vamos usar o dbt
-
-O dbt é uma ferramenta focada na transformação de dados dentro de um pipeline de ETL/ELT, onde ETL significa Extrair, Transformar e Carregar. Ele se concentra especificamente no aspecto de Transformação (T), permitindo a criação de fluxos de trabalho de transformação de dados usando SQL.
-
-![Vamos utilizar o case Northwind](./pics/northwind.png)
-
 ## Pré-requisitos
 
 Antes de começar, certifique-se de ter os seguintes softwares instalados em seu sistema:
@@ -60,7 +54,7 @@ Antes de começar, certifique-se de ter os seguintes softwares instalados em seu
 Primeiro, clone este repositório para o seu ambiente local usando Git. Abra um terminal e execute o seguinte comando:
 
 ```sh
-git clone https://github.com/seu-usuario/dbt-core-northwind-project.git
+git clone git@github.com:lvgalvao/dbt-core-northwind-project.git
 cd dbt-core-northwind-project
 ```
 
@@ -72,14 +66,49 @@ Com o Docker instalado, navegue até o diretório do projeto clonado e execute o
 docker-compose up --build
 ```
 
-Isso iniciará os contêineres necessários: PostgreSQL, pgAdmin, dbt-core e dbt-docs.
+Isso iniciará os contêineres necessários: PostgreSQL, pgAdmin, dbt-core.
 
-### 3. Rodar o Primeiro Comando dbt
+### 3. Acessar o pgAdmin para visualizar o seu banco
 
-Com os contêineres em execução, você está pronto para rodar seu primeiro comando dbt. Abra um novo terminal e execute:
+Para acessar o pgAdmin e visualizar os dados, abra seu navegador e vá para:
+
+- URL: `http://localhost:5050/browser/`
+
+Use as seguintes credenciais para se conectar ao banco de dados:
+
+- **Host**: `db`
+- **Porta**: `5432`
+- **Nome do Banco**: `northwind`
+- **Usuário**: `postgres`
+- **Senha**: `postgres`
+
+Vamos trabalhar nesse projeto com a base northwind
+
+O dbt é uma ferramenta focada na transformação de dados dentro de um pipeline de ETL/ELT, onde ETL significa Extrair, Transformar e Carregar. Ele se concentra especificamente no aspecto de Transformação (T), permitindo a criação de fluxos de trabalho de transformação de dados usando SQL.
+
+![Vamos utilizar o case Northwind](./pics/northwind.png)
+
+Gaste uns 10 minutos avaliando o seu banco de dados sobre esses pontos
+
+- Quais são minhas tabelas mais importantes?
+- Que tipo de KPIs uma empresa dessa precisa?
+- Qual a melhor forma de servir esses dados? que tabelas? modelagens?
+- Como estruturar um Data Warehouse para garantir:
+    1) que a transformação seja compatível com python e sql
+    2) tenha versionamento de versão e CI/CD
+    3) tenha testes unitários, testes de dados e documentação.
+
+### 4. Rode agora o primeiro comando dbt e veja tudo isso em segundos
+
+Deve ser muito complexo tudo isso, correto?
+
+Mais ou menos
+
+Você está pronto para rodar seu primeiro comando dbt? 
+
+Abra um novo terminal e execute:
 
 ```sh
-docker exec -it dbt-core /bin/bash
 dbt run
 ```
 
@@ -87,7 +116,7 @@ Esse comando executará todas as transformações definidas nos modelos dbt e vo
 
 ### 4. Gerar e Acessar a Documentação dbt
 
-Para gerar e acessar a documentação do dbt, execute os seguintes comandos no terminal interativo do contêiner `dbt-core`:
+Para gerar e acessar a documentação do dbt, execute os seguintes comandos no ambiente local:
 
 ```sh
 dbt docs generate
@@ -100,56 +129,23 @@ Abra seu navegador e vá para:
 
 Você verá a documentação interativa gerada pelo dbt.
 
-## Estrutura do Projeto
+## Jornada de Dados
 
-- **dbt**: Contém os arquivos de configuração e scripts do dbt.
-- **docker-compose.yml**: Define os serviços Docker necessários para o projeto.
-- **profiles.yml**: Configurações do perfil do dbt.
+Esse projeto faz parte da comunidade de estudo Jornada de dados
+Nossa missão é **fornecer o melhor ensino em engenharia de dados**
 
-## Comandos dbt
+![Texto alternativo](./pics/jornada.png)
 
-Você pode executar comandos dbt dentro do contêiner `dbt-core`. Para abrir um terminal interativo no contêiner, execute:
+Se você quer:
 
-```sh
-docker exec -it dbt-core /bin/bash
-```
+1) Construir uma **base sólida** em Python e SQL
+2) Aprender as **principais habilidades e ferramentas** de engenharia de dados
+3) Criar ou melhorar seu **portfólio** de dados
+4) Criar ou aumentar o seu **networking** na área
+5) Mudar ou dar o **próximo passo em sua carreira**
 
-Dentro do contêiner, você pode usar comandos dbt, como:
+A **Jornada de Dados** é o seu lugar
 
-```sh
-dbt run
-dbt test
-dbt docs generate
-dbt docs serve
-```
+## Veja a documentação completa**:
 
-## Contribuição
-
-Sinta-se à vontade para contribuir com este projeto. Crie um fork, faça suas alterações e envie um pull request.
-
-## Exemplos Práticos
-
-Depois de configurar tudo, aqui estão alguns exemplos de como você pode usar o dbt:
-
-```sh
-# Rodar todos os modelos
-dbt run
-
-# Testar os modelos
-dbt test
-
-# Compilar os modelos sem executar
-dbt compile
-```
-
-## Casos de Uso
-
-Este projeto é ideal para:
-
-- Profissionais de dados que desejam automatizar transformações de dados.
-- Empresas que precisam de uma solução escalável para transformar dados em insights acionáveis.
-- Estudantes e entusiastas que querem aprender sobre dbt e pipelines de dados modernos.
-
----
-
-Espero que essas melhorias ajudem a tornar seu README mais claro e atraente para um público mais amplo!
+[![Documentacao](./pics/doc.png)](https://lvgalvao.github.io/dbt-core-northwind-project/)

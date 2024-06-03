@@ -16,7 +16,7 @@ services:
     ports:
       - 55432:5432
     networks:
-      - db
+      - northwind-network
 
   pgadmin:
     container_name: pgadmin
@@ -34,7 +34,7 @@ services:
     ports:
       - 5050:5050
     networks:
-      - db
+      - northwind-network
 
   dbt-core:
     container_name: dbt-core
@@ -43,14 +43,14 @@ services:
       dockerfile: Dockerfile
     environment:
       DBT_PROFILES_DIR: /northwind
-      DB_NAME_DEV: northwind
       DB_HOST_DEV: db
-      DB_PASS_DEV: postgres
       DB_PORT_DEV: 5432
+      DB_NAME_DEV: northwind
+      DB_USER_DEV: postgres
+      DB_PASS_DEV: postgres
       DB_SCHEMA_DEV: public
       DB_THREADS_DEV: 1
       DB_TYPE_DEV: postgres
-      DB_USER_DEV: postgres
       DB_NAME_PROD: ${DB_NAME_PROD}
       DB_HOST_PROD: ${DB_HOST_PROD}
       DB_PASS_PROD: ${DB_PASS_PROD}
@@ -63,45 +63,15 @@ services:
       - .:/usr/app
       - ./dbt/target:/usr/app/dbt/target
       - ./profiles.yml:/northwind/profiles.yml
-    networks:
-      - db
-
-  dbt-docs:
-    container_name: dbt-docs
-    build:
-      context: .
-      dockerfile: Dockerfile
-    environment:
-      DBT_PROFILES_DIR: /northwind
-      DB_NAME_DEV: northwind
-      DB_HOST_DEV: db
-      DB_PASS_DEV: postgres
-      DB_PORT_DEV: 5432
-      DB_SCHEMA_DEV: public
-      DB_THREADS_DEV: 1
-      DB_TYPE_DEV: postgres
-      DB_USER_DEV: postgres
-      DB_NAME_PROD: ${DB_NAME_PROD}
-      DB_HOST_PROD: ${DB_HOST_PROD}
-      DB_PASS_PROD: ${DB_PASS_PROD}
-      DB_PORT_PROD: ${DB_PORT_PROD}
-      DB_SCHEMA_PROD: ${DB_SCHEMA_PROD}
-      DB_THREADS_PROD: ${DB_THREADS_PROD}
-      DB_TYPE_PROD: ${DB_TYPE_PROD}
-      DB_USER_PROD: ${DB_USER_PROD}
-    volumes:
-      - .:/usr/app
-      - ./dbt/target:/usr/app/dbt/target
-      - ./profiles.yml:/northwind/profiles.yml
-    entrypoint: ["sh", "-c"]
-    command: ["dbt docs generate --target dev && dbt docs serve --no-browser"]
     ports:
-      - 8080:8080
-    networks:
+      - 8081:8081
+    depends_on:
       - db
+    networks:
+      - northwind-network
 
 networks:
-  db:
+  northwind-network:
     driver: bridge
 
 volumes:
