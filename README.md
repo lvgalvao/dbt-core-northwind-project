@@ -114,9 +114,15 @@ dbt run
 
 Esse comando executará todas as transformações definidas nos modelos dbt e você verá a saída dos resultados no terminal.
 
-### 4. Gerar e Acessar a Documentação dbt
+### 5. Gerar e Acessar a Documentação dbt
 
 Para gerar e acessar a documentação do dbt, execute os seguintes comandos no ambiente local:
+
+```bash
+python -m venv .venv
+source .venv/Scripts/activate
+pip install -r requirements.txt 
+```
 
 ```sh
 dbt docs generate
