@@ -1,0 +1,13 @@
+version: 2
+
+docs:
+  - name: overview
+    path: models/docs/overview.md
+
+# Exemplo de configuração de um modelo
+models:
+  - name: reports
+    description: "Descrição do modelo"
+    columns:
+      - name: id
+        description: "Identificador único"
