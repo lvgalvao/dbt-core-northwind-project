@@ -1,5 +1,10 @@
 -- models/reporting/uk_clients_who_pay_more_than_1000.sql
 
+{{ config(
+    schema='gold',
+    materialized='table'
+) }}
+
 select 
     customers.contact_name, 
     sum(order_details.unit_price * order_details.quantity * (1.0 - order_details.discount) * 100) / 100 as payments

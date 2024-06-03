@@ -1,5 +1,10 @@
 -- models/reporting/report_total_revenues_1997.sql
 
+{{ config(
+    schema='gold',
+    materialized='table'
+) }}
+
 with ord as (
     select order_id 
     from {{ ref('stg_orders') }}
