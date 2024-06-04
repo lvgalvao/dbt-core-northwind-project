@@ -16,20 +16,22 @@ Esse projeto tem como objetivo apresentar de forma prática uma solução comple
 
 ## Tabela de Conteúdos
 
-- [Introdução](#introdução)
-- [Objetivo do Projeto](#objetivo-do-projeto)
-- [O que é dbt?](#o-que-é-dbt)
-- [Pré-requisitos](#pré-requisitos)
-- [Hello World](#hello-world)
-  - [1. Clonar o Repositório](#1-clonar-o-repositório)
-  - [2. Executar os Contêineres Docker](#2-executar-os-contêineres-docker)
-  - [3. Rodar o Primeiro Comando dbt](#3-rodar-o-primeiro-comando-dbt)
-  - [4. Gerar e Acessar a Documentação dbt](#4-gerar-e-acessar-a-documentação-dbt)
-- [Estrutura do Projeto](#estrutura-do-projeto)
-- [Comandos dbt](#comandos-dbt)
-- [Contribuição](#contribuição)
-- [Exemplos Práticos](#exemplos-práticos)
-- [Casos de Uso](#casos-de-uso)
+- [dbt-core-northwind-project](#dbt-core-northwind-project)
+  - [O que é dbt?](#o-que-é-dbt)
+  - [Arquitetura moderna](#arquitetura-moderna)
+  - [Tabela de Conteúdos](#tabela-de-conteúdos)
+  - [Introdução](#introdução)
+  - [Objetivo do Projeto](#objetivo-do-projeto)
+  - [Pré-requisitos](#pré-requisitos)
+  - [Hello World](#hello-world)
+    - [1. Clonar o Repositório](#1-clonar-o-repositório)
+    - [2. Executar os Contêineres Docker](#2-executar-os-contêineres-docker)
+    - [3. Acessar o pgAdmin para visualizar o seu banco](#3-acessar-o-pgadmin-para-visualizar-o-seu-banco)
+    - [3. Configurando o dbt\_profile.yml](#3-configurando-o-dbt_profileyml)
+    - [5. Rode agora o primeiro comando dbt e veja tudo isso em segundos](#5-rode-agora-o-primeiro-comando-dbt-e-veja-tudo-isso-em-segundos)
+    - [6. Gerar e Acessar a Documentação dbt](#6-gerar-e-acessar-a-documentação-dbt)
+  - [Jornada de Dados](#jornada-de-dados)
+  - [Veja a documentação completa\*\*:](#veja-a-documentação-completa)
 
 ## Introdução
 
@@ -98,7 +100,30 @@ Gaste uns 10 minutos avaliando o seu banco de dados sobre esses pontos
     2) tenha versionamento de versão e CI/CD
     3) tenha testes unitários, testes de dados e documentação.
 
-### 4. Rode agora o primeiro comando dbt e veja tudo isso em segundos
+### 3. Configurando o dbt_profile.yml
+
+```bash
+northwind:
+  outputs:
+    dev:
+      dbname: northwind
+      host: localhost
+      pass: postgres
+      port: 5432
+      schema: public
+      threads: 1
+      type: postgres
+      user: postgres
+  target: dev
+```
+
+Verifique sua configuração com o comando 
+
+```bash
+dbt debug
+```
+
+### 5. Rode agora o primeiro comando dbt e veja tudo isso em segundos
 
 Deve ser muito complexo tudo isso, correto?
 
@@ -114,7 +139,7 @@ dbt run
 
 Esse comando executará todas as transformações definidas nos modelos dbt e você verá a saída dos resultados no terminal.
 
-### 5. Gerar e Acessar a Documentação dbt
+### 6. Gerar e Acessar a Documentação dbt
 
 Para gerar e acessar a documentação do dbt, execute os seguintes comandos no ambiente local:
 
