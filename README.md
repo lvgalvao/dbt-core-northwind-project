@@ -1,6 +1,6 @@
 # dbt-core-northwind-project
 
-Projeto de conclusão do bootcamp de SQL e analytics engineer da [Jornada de Dados](www.suajornadadedados.com.br)
+Projeto de conclusão do bootcamp de SQL e analytics engineer da [Jornada de Dados](https://www.suajornadadedados.com.br)
 
 ## O que é dbt?
 
