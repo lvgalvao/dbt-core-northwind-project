@@ -39,11 +39,10 @@ jobs:
               threads: ${{ secrets.DB_THREADS_PROD }}
         " > ~/.dbt/profiles.yml
 
-    - name: Change directory to dbt project
-      run: cd northwind
-      
-    - name: Generate dbt docs
-      run: dbt docs generate
+    - name: Install dependencies and generate docs
+      run: |
+        cd northwind
+        dbt docs generate
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
