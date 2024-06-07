@@ -37,7 +37,13 @@ jobs:
               dbname: ${{ secrets.DB_NAME_PROD }}
               schema: ${{ secrets.DB_SCHEMA_PROD }}
               threads: ${{ secrets.DB_THREADS_PROD }}
-        " > ~/.dbt/profiles.yml      
+        " > ~/.dbt/profiles.yml
+
+    - name: Change directory to dbt project
+      run: cd northwind
+
+    - name: Install dependencies
+      run: dbt deps
       
     - name: Generate dbt docs
       run: dbt docs generate
@@ -46,4 +52,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GH_PAT }}
-        publish_dir: ./target
+        publish_dir: ./northwind/target
