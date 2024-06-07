@@ -38,9 +38,6 @@ jobs:
               schema: ${{ secrets.DB_SCHEMA_PROD }}
               threads: ${{ secrets.DB_THREADS_PROD }}
         " > ~/.dbt/profiles.yml      
-
-    - name: Install dependencies
-      run: dbt deps
       
     - name: Generate dbt docs
       run: dbt docs generate
