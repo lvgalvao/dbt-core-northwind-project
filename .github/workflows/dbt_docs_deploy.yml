@@ -38,8 +38,10 @@ jobs:
               schema: ${{ secrets.DB_SCHEMA_PROD }}
               threads: ${{ secrets.DB_THREADS_PROD }}
         " > ~/.dbt/profiles.yml
+
+    - name: Install dependencies and generate docs
+      run: |
         cd northwind
-        export DBT_PROFILES_DIR=~/.dbt/profiles.yml
         dbt docs generate
 
     - name: Deploy to GitHub Pages
