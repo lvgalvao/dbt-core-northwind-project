@@ -1,0 +1,17 @@
+.git
+.github
+.qodo
+docs
+pics
+site
+tests
+mkdocs.yml
+README.md
+northwind.sql
+.env
+.venv
+venv
+__pycache__
+**/target
+**/dbt_packages
+**/logs

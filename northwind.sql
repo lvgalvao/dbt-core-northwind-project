@@ -13,7 +13,7 @@ SET client_min_messages = warning;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+-- SET default_with_oids = false;  -- parametro removido no PostgreSQL 12+
 
 
 ---

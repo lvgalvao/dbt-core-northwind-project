@@ -1,0 +1,75 @@
+name: northwind
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: northwind_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER_PROD}
+      POSTGRES_PASSWORD: ${DB_PASS_PROD}
+      POSTGRES_DB: ${DB_NAME_PROD}
+    ports:
+      - "${POSTGRES_HOST_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Executado apenas na PRIMEIRA subida (volume vazio): carrega o Northwind
+      - ./northwind.sql:/docker-entrypoint-initdb.d/01_northwind.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks:
+      - northwind_net
+
+  pgadmin:
+    image: dpage/pgadmin4:8
+    container_name: northwind_pgadmin
+    restart: unless-stopped
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@northwind.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    ports:
+      - "${PGADMIN_HOST_PORT:-8080}:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - northwind_net
+
+  dbt:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: northwind_dbt
+    env_file:
+      - .env
+    ports:
+      # UI da documentacao. `dbt docs serve` escuta so em 127.0.0.1 (sem flag --host
+      # no dbt 1.8), entao nao e alcancavel de fora. Sirva o target/ assim:
+      #   docker compose exec dbt dbt docs generate
+      #   docker compose exec -d dbt python -m http.server 8080 --bind 0.0.0.0 --directory target
+      - "${DBT_DOCS_HOST_PORT:-8082}:8080"
+    volumes:
+      # Bind mounts: editar modelos na maquina reflete no container sem rebuild
+      - ./northwind:/usr/app/northwind
+      - ./profiles.yml:/usr/app/profiles/profiles.yml:ro
+    working_dir: /usr/app/northwind
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - northwind_net
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  northwind_net:
+    driver: bridge

@@ -62,27 +62,54 @@ cd dbt-core-northwind-project
 
 ### 2. Executar os Contêineres Docker
 
-Com o Docker instalado, navegue até o diretório do projeto clonado e execute o seguinte comando para iniciar os contêineres:
+O `profiles.yml` deste projeto lê a conexão via `env_var()`, então o arquivo `.env` é
+**obrigatório** para o ambiente subir. Ele está no `.gitignore` (por conter credenciais),
+portanto não vem no clone — você precisa criá-lo a partir do exemplo:
 
 ```sh
-docker-compose up --build
+cp .env.example .env
 ```
 
-Isso iniciará os contêineres necessários: PostgreSQL, pgAdmin, dbt-core.
+> Sem esse passo o `docker compose up` falha, porque as variáveis `DB_*` ficam vazias.
+
+Com o `.env` no lugar, inicie os contêineres:
+
+```sh
+docker compose up -d --build
+```
+
+Isso iniciará os três contêineres: PostgreSQL, pgAdmin e dbt-core. O `healthcheck` do
+Postgres garante que o pgAdmin e o dbt só iniciem depois que o banco estiver aceitando
+conexões.
+
+A base Northwind é carregada automaticamente **na primeira subida**, quando o volume
+`postgres_data` ainda está vazio. Nas próximas vezes os dados já estão persistidos —
+basta `docker compose up -d`. Para recomeçar do zero, use `docker compose down -v`
+(o `-v` apaga os volumes) e suba novamente.
+
+As portas expostas na máquina são configuráveis no `.env`:
+
+| Serviço | Endpoint padrão |
+| --- | --- |
+| PostgreSQL | `localhost:5433` |
+| pgAdmin | http://localhost:8081 |
+| dbt docs | http://localhost:8082 |
 
 ### 3. Acessar o pgAdmin para visualizar o seu banco
 
 Para acessar o pgAdmin e visualizar os dados, abra seu navegador e vá para:
 
-- URL: `http://localhost:5050/browser/`
+- URL: http://localhost:8081
 
-Use as seguintes credenciais para se conectar ao banco de dados:
+Ele está em modo desktop, ou seja, abre direto sem tela de login. Ao registrar o servidor,
+use as seguintes credenciais:
 
-- **Host**: `db`
-- **Porta**: `5432`
+- **Host**: `postgres` (o nome do serviço no compose, **não** `localhost` — o pgAdmin está
+  na mesma rede Docker que o banco)
+- **Porta**: `5432` (a porta interna do container, não a exposta na máquina)
 - **Nome do Banco**: `northwind`
-- **Usuário**: `postgres`
-- **Senha**: `postgres`
+- **Usuário**: `northwind`
+- **Senha**: `northwind`
 
 Vamos trabalhar nesse projeto com a base northwind
 
@@ -141,24 +168,42 @@ Esse comando executará todas as transformações definidas nos modelos dbt e vo
 
 ### 6. Gerar e Acessar a Documentação dbt
 
-Para gerar e acessar a documentação do dbt, execute os seguintes comandos no ambiente local:
+A UI da documentação **não sobe junto com o `docker compose up`** — a porta 8082 é publicada,
+mas nada escuta nela até você iniciar o servidor. São dois comandos:
+
+```sh
+docker compose exec dbt dbt docs generate
+docker compose exec -d dbt python -m http.server 8080 --bind 0.0.0.0 --directory target
+```
+
+Abra seu navegador e vá para:
+
+- URL: http://localhost:8082
+
+Você verá a documentação interativa gerada pelo dbt, com o catálogo dos models, a linhagem
+(DAG) e as descrições declaradas nos arquivos `.yml`.
+
+> **Por que não `dbt docs serve`?** No dbt 1.8 esse comando escuta apenas em `127.0.0.1` e
+> não oferece a flag `--host`. Dentro de um container isso o torna inalcançável de fora, e o
+> mapeamento de porta não resolve. Servir o diretório `target/` com o `http.server` faz
+> exatamente o mesmo que o `dbt docs serve` — ele apenas serve arquivos estáticos.
+
+O servidor não sobrevive a um `docker compose restart` ou `down`, então rode o segundo comando
+novamente quando precisar. Rode também o `dbt docs generate` sempre que alterar os models,
+para o catálogo refletir o estado atual.
+
+Se preferir rodar fora do Docker, com um ambiente virtual local:
 
 ```bash
 python -m venv .venv
 source .venv/Scripts/activate
-pip install -r requirements.txt 
+pip install -r requirements.txt
 ```
 
 ```sh
 dbt docs generate
 dbt docs serve --port 8080
 ```
-
-Abra seu navegador e vá para:
-
-- URL: `http://localhost:8080`
-
-Você verá a documentação interativa gerada pelo dbt.
 
 ## Jornada de Dados
 
